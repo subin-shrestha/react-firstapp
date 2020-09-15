@@ -9,7 +9,7 @@ function HomeGuest() {
 
   async function handleSignup(e) {
     e.preventDefault()
-    const resposne = await Request("/register", "POST", { username: "test4", email: "test4@test.com", password: "123456789000" })
+    const resposne = await Request("/register", "POST", { username, email, password })
     console.log(resposne)
   }
 
