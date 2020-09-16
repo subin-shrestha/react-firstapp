@@ -1,4 +1,5 @@
 import React, { useContext } from "react"
+import { Link } from "react-router-dom"
 import UserContext from "../../_contexts/UserContext"
 
 function Registered() {
@@ -24,9 +25,9 @@ function Registered() {
       <a href="#" className="mr-2">
         <img className="small-header-avatar" src={localStorage.getItem("avatar")} />
       </a>
-      <a className="btn btn-sm btn-success mr-2" href="/create-post">
+      <Link to="/post/create" className="btn btn-sm btn-success mr-2">
         Create Post
-      </a>
+      </Link>
       <button onClick={hangleLogout} className="btn btn-sm btn-secondary">
         Sign Out
       </button>
