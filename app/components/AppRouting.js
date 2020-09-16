@@ -1,14 +1,18 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Switch, Route } from "react-router-dom"
+import UserContext from "../_context/UserContext"
 import About from "./footer/About"
 import Terms from "./footer/Terms"
+import Home from "./home/Home"
 import HomeGuest from "./home/HomeGuest"
 
-function AppRouting() {
+function AppRouting(props) {
+  const { loggedIn } = useContext(UserContext)
+
   return (
     <Switch>
       <Route path="/" exact>
-        <HomeGuest />
+        {loggedIn ? <Home /> : <HomeGuest />}
       </Route>
       <Route path="/about-us">
         <About />

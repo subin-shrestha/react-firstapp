@@ -1,10 +1,11 @@
-import React, { useState } from "react"
+import React, { useContext } from "react"
 import { Link } from "react-router-dom"
+import UserContext from "../_context/UserContext"
 import Annoymous from "./header/Annoymous"
 import Registered from "./header/Registered"
 
-function Header() {
-  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("token")))
+function Header(props) {
+  const { loggedIn } = useContext(UserContext)
 
   return (
     <header className="header-bar bg-primary mb-3">
@@ -14,7 +15,7 @@ function Header() {
             ComplexApp
           </Link>
         </h4>
-        {loggedIn ? <Registered setLoggedIn={setLoggedIn} /> : <Annoymous setLoggedIn={setLoggedIn} />}
+        {loggedIn ? <Registered /> : <Annoymous />}
       </div>
     </header>
   )

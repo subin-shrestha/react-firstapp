@@ -1,10 +1,13 @@
-import React from "react"
+import React, { useContext } from "react"
+import UserContext from "../../_context/UserContext"
 
-function Registered(props) {
+function Registered() {
+  const { setLoggedIn } = useContext(UserContext)
+
   function hangleLogout() {
-    props.setLoggedIn(false)
+    setLoggedIn(false)
     localStorage.removeItem("token")
-    localStorage.removeItem("name")
+    localStorage.removeItem("username")
     localStorage.removeItem("avatar")
   }
 

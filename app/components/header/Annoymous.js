@@ -1,9 +1,11 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
+import UserContext from "../../_context/UserContext"
 import Request from "../../_request/Request"
 
-function Annoymous(props) {
+function Annoymous() {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
+  const { setLoggedIn } = useContext(UserContext)
 
   async function HandleLogin(e) {
     e.preventDefault()
@@ -13,7 +15,7 @@ function Annoymous(props) {
       localStorage.setItem("username", response.data.username)
       localStorage.setItem("avatar", response.data.avatar)
 
-      props.setLoggedIn(true)
+      setLoggedIn(true)
       console.log("Login successful.")
     } else {
       console.log("Incorrect Username or Password.")

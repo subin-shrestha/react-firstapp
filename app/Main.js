@@ -1,17 +1,22 @@
-import React from "react"
+import React, { useState } from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
 import AppRouting from "./components/AppRouting"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
+import UserContext from "./_context/UserContext"
 
 function Main() {
+  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("token")))
+
   return (
-    <BrowserRouter>
-      <Header />
-      <AppRouting />
-      <Footer />
-    </BrowserRouter>
+    <UserContext.Provider value={{ loggedIn, setLoggedIn }}>
+      <BrowserRouter>
+        <Header />
+        <AppRouting />
+        <Footer />
+      </BrowserRouter>
+    </UserContext.Provider>
   )
 }
 
