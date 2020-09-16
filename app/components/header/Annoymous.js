@@ -5,7 +5,7 @@ import Request from "../../_requests/Request"
 function Annoymous() {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
-  const { setLoggedIn } = useContext(UserContext)
+  const { setLoggedIn, addAlertMessage } = useContext(UserContext)
 
   async function HandleLogin(e) {
     e.preventDefault()
@@ -16,7 +16,7 @@ function Annoymous() {
       localStorage.setItem("avatar", response.data.avatar)
 
       setLoggedIn(true)
-      console.log("Login successful.")
+      addAlertMessage("Login successfully!", "success")
     } else {
       console.log("Incorrect Username or Password.")
     }

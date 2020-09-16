@@ -2,10 +2,11 @@ import React, { useContext } from "react"
 import UserContext from "../../_contexts/UserContext"
 
 function Registered() {
-  const { setLoggedIn } = useContext(UserContext)
+  const { setLoggedIn, addAlertMessage } = useContext(UserContext)
 
   function hangleLogout() {
     setLoggedIn(false)
+    addAlertMessage("Logout successfully!", "danger")
     localStorage.removeItem("token")
     localStorage.removeItem("username")
     localStorage.removeItem("avatar")
