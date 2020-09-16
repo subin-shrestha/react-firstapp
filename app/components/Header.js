@@ -1,11 +1,11 @@
 import React, { useContext } from "react"
 import { Link } from "react-router-dom"
-import UserContext from "../_contexts/UserContext"
+import StateContext from "../_contexts/StateContext"
 import Annoymous from "./header/Annoymous"
 import Registered from "./header/Registered"
 
 function Header(props) {
-  const { loggedIn } = useContext(UserContext)
+  const appState = useContext(StateContext)
 
   return (
     <header className="header-bar bg-primary mb-3">
@@ -15,7 +15,7 @@ function Header(props) {
             ComplexApp
           </Link>
         </h4>
-        {loggedIn ? <Registered /> : <Annoymous />}
+        {appState.loggedIn ? <Registered /> : <Annoymous />}
       </div>
     </header>
   )

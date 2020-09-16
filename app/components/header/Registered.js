@@ -1,13 +1,15 @@
 import React, { useContext } from "react"
 import { Link } from "react-router-dom"
-import UserContext from "../../_contexts/UserContext"
+import DispatchContext from "../../_contexts/DispatchContext"
+import StateContext from "../../_contexts/StateContext"
 
 function Registered() {
-  const { setLoggedIn, addAlertMessage } = useContext(UserContext)
+  const appDispatch = useContext(DispatchContext)
 
   function hangleLogout() {
-    setLoggedIn(false)
-    addAlertMessage("Logout successfully!", "danger")
+    appDispatch({ type: "logout" })
+    appDispatch({ type: "alertMessage", value: "Logout successfully!", alert_type: "danger" })
+
     localStorage.removeItem("token")
     localStorage.removeItem("username")
     localStorage.removeItem("avatar")

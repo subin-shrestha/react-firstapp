@@ -1,24 +1,26 @@
 import React, { useContext, useState } from "react"
-import UserContext from "../../_contexts/UserContext"
+import DispatchContext from "../../_contexts/DispatchContext"
+import StateContext from "../../_contexts/StateContext"
 import Request from "../../_requests/Request"
 
 function Annoymous() {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
-  const { setLoggedIn, addAlertMessage } = useContext(UserContext)
+  const appDispatch = useContext(DispatchContext)
 
   async function HandleLogin(e) {
     e.preventDefault()
     const response = await Request("/login", "POST", { username, password })
+
     if (response.data) {
       localStorage.setItem("token", response.data.token)
       localStorage.setItem("username", response.data.username)
       localStorage.setItem("avatar", response.data.avatar)
 
-      setLoggedIn(true)
-      addAlertMessage("Login successfully!", "success")
+      appDispatch({ type: "login" })
+      appDispatch({ type: "alertMessage", value: "Login successfully!", alert_type: "success" })
     } else {
-      console.log("Incorrect Username or Password.")
+      appDispatch({ type: "alertMessage", value: "Incorrect Username or Password!", alert_type: "danger" })
     }
   }
 

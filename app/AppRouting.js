@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { Switch, Route } from "react-router-dom"
-import UserContext from "./_contexts/UserContext"
+import StateContext from "./_contexts/StateContext"
 import About from "./components/footer/About"
 import Terms from "./components/footer/Terms"
 import Home from "./components/home/Home"
@@ -9,12 +9,12 @@ import CreatePost from "./post/CreatePost"
 import ViewPost from "./post/ViewPost"
 
 function AppRouting(props) {
-  const { loggedIn } = useContext(UserContext)
+  const state = useContext(StateContext)
 
   return (
     <Switch>
       <Route path="/" exact>
-        {loggedIn ? <Home /> : <HomeGuest />}
+        {state.loggedIn ? <Home /> : <HomeGuest />}
       </Route>
       <Route path="/post/create">
         <CreatePost />

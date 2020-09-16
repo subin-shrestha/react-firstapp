@@ -1,23 +1,23 @@
 import React, { useContext, useState } from "react"
 import { withRouter } from "react-router-dom"
 import Page from "../components/Page"
-import UserContext from "../_contexts/UserContext"
+import DispatchContext from "../_contexts/DispatchContext"
 import Request from "../_requests/Request"
 
 function CreatePost(props) {
-  const { addAlertMessage } = useContext(UserContext)
   const [title, setTitle] = useState()
   const [body, setBody] = useState()
+
+  const appDispatch = useContext(DispatchContext)
 
   async function handleCreatePost(e) {
     e.preventDefault()
     const response = await Request("/create-post", "POST", { title, body, token: localStorage.getItem("token") })
-    console.log(response)
-    if (response.data) {
-      addAlertMessage("New post created successfully.", "success")
+    if (response.data.constructor === String) {
+      appDispatch({ type: "alertMessage", value: "New post created successfully.", alert_type: "success" })
       props.history.push(`/post/${response.data}`)
     } else {
-      addAlertMessage("Something went wrong.", "danger")
+      appDispatch({ type: "alertMessage", value: response.data[0], alert_type: "danger" })
     }
   }
   return (

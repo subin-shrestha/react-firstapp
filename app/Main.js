@@ -1,29 +1,47 @@
 import React, { useState } from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
+import { useImmerReducer } from "use-immer"
 import AppRouting from "./AppRouting"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
-import UserContext from "./_contexts/UserContext"
+import DispatchContext from "./_contexts/DispatchContext"
+import StateContext from "./_contexts/StateContext"
 import Alert from "./_directives/Alert"
 
 function Main() {
-  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("token")))
-  const [alertMessages, setAlertMessages] = useState([])
-
-  function addAlertMessage(content, type) {
-    setAlertMessages(prev => prev.concat({ content, type }))
+  const initialState = {
+    loggedIn: Boolean(localStorage.getItem("token")),
+    alertMessages: []
   }
 
+  function ourReducer(draft, action) {
+    switch (action.type) {
+      case "login":
+        draft.loggedIn = true
+        break
+      case "logout":
+        draft.loggedIn = false
+        break
+      case "alertMessage":
+        draft.alertMessages.push({ content: action.value, alert_type: action.alert_type })
+        break
+    }
+  }
+
+  const [state, dispatch] = useImmerReducer(ourReducer, initialState)
+
   return (
-    <UserContext.Provider value={{ loggedIn, setLoggedIn, addAlertMessage }}>
-      <BrowserRouter>
-        <Alert messages={alertMessages} />
-        <Header />
-        <AppRouting />
-        <Footer />
-      </BrowserRouter>
-    </UserContext.Provider>
+    <StateContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>
+        <BrowserRouter>
+          <Alert messages={state.alertMessages} />
+          <Header />
+          <AppRouting />
+          <Footer />
+        </BrowserRouter>
+      </DispatchContext.Provider>
+    </StateContext.Provider>
   )
 }
 
