@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
-import AppRouting from "./components/AppRouting"
+import AppRouting from "./AppRouting"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
 import UserContext from "./_contexts/UserContext"
