@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { Switch, Route } from "react-router-dom"
-import UserContext from "../_context/UserContext"
+import UserContext from "../_contexts/UserContext"
 import About from "./footer/About"
 import Terms from "./footer/Terms"
 import Home from "./home/Home"

@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import UserContext from "../../_context/UserContext"
+import UserContext from "../../_contexts/UserContext"
 
 function Registered() {
   const { setLoggedIn } = useContext(UserContext)

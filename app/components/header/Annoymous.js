@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react"
+import UserContext from "../../_contexts/UserContext"
 import Request from "../../_requests/Request"
 
 function Annoymous() {
