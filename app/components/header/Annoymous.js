@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react"
-import UserContext from "../../_context/UserContext"
-import Request from "../../_request/Request"
+import Request from "../../_requests/Request"
 
 function Annoymous() {
   const [username, setUsername] = useState()
