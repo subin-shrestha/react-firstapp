@@ -50,6 +50,7 @@ function CreatePost(props) {
             <small>Body Content</small>
           </label>
           <textarea onChange={e => setBody(e.target.value)} name="body" id="post-body" className="body-content tall-textarea form-control" type="text"></textarea>
+          <small class="text-lg text-muted">You can use markdown for styling.</small>
         </div>
 
         <button className="btn btn-primary">Save New Post</button>
