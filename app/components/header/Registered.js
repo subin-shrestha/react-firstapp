@@ -1,15 +1,16 @@
 import React, { useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import DispatchContext from "../../_contexts/DispatchContext"
 import StateContext from "../../_contexts/StateContext"
 
-function Registered() {
+function Registered(props) {
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
   function hangleLogout() {
     appDispatch({ type: "logout" })
     appDispatch({ type: "alertMessage", value: "Logout successfully!", alert_type: "danger" })
+    props.history.push("/")
   }
 
   return (
@@ -21,9 +22,9 @@ function Registered() {
         <i className="fas fa-comment"></i>
         <span className="chat-count-badge text-white"> </span>
       </span>
-      <a href="#" className="mr-2">
+      <Link to={`/profile/${appState.user.username}`} className="mr-2">
         <img className="small-header-avatar" src={appState.user.avatar} />
-      </a>
+      </Link>
       <Link to="/post/create" className="btn btn-sm btn-success mr-2">
         Create Post
       </Link>
@@ -34,4 +35,4 @@ function Registered() {
   )
 }
 
-export default Registered
+export default withRouter(Registered)
