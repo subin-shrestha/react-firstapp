@@ -5,14 +5,11 @@ import StateContext from "../../_contexts/StateContext"
 
 function Registered() {
   const appDispatch = useContext(DispatchContext)
+  const appState = useContext(StateContext)
 
   function hangleLogout() {
     appDispatch({ type: "logout" })
     appDispatch({ type: "alertMessage", value: "Logout successfully!", alert_type: "danger" })
-
-    localStorage.removeItem("token")
-    localStorage.removeItem("username")
-    localStorage.removeItem("avatar")
   }
 
   return (
@@ -25,7 +22,7 @@ function Registered() {
         <span className="chat-count-badge text-white"> </span>
       </span>
       <a href="#" className="mr-2">
-        <img className="small-header-avatar" src={localStorage.getItem("avatar")} />
+        <img className="small-header-avatar" src={appState.user.avatar} />
       </a>
       <Link to="/post/create" className="btn btn-sm btn-success mr-2">
         Create Post

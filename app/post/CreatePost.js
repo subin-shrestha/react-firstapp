@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react"
 import { withRouter } from "react-router-dom"
 import Page from "../components/Page"
 import DispatchContext from "../_contexts/DispatchContext"
+import StateContext from "../_contexts/StateContext"
 import Request from "../_requests/Request"
 
 function CreatePost(props) {
@@ -9,10 +10,11 @@ function CreatePost(props) {
   const [body, setBody] = useState()
 
   const appDispatch = useContext(DispatchContext)
+  const appState = useContext(StateContext)
 
   async function handleCreatePost(e) {
     e.preventDefault()
-    const response = await Request("/create-post", "POST", { title, body, token: localStorage.getItem("token") })
+    const response = await Request("/create-post", "POST", { title, body, token: appState.user.token })
     if (response.data.constructor === String) {
       appDispatch({ type: "alertMessage", value: "New post created successfully.", alert_type: "success" })
       props.history.push(`/post/${response.data}`)

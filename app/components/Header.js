@@ -4,7 +4,7 @@ import StateContext from "../_contexts/StateContext"
 import Annoymous from "./header/Annoymous"
 import Registered from "./header/Registered"
 
-function Header(props) {
+function Header() {
   const appState = useContext(StateContext)
 
   return (

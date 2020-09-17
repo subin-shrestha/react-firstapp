@@ -13,11 +13,7 @@ function Annoymous() {
     const response = await Request("/login", "POST", { username, password })
 
     if (response.data) {
-      localStorage.setItem("token", response.data.token)
-      localStorage.setItem("username", response.data.username)
-      localStorage.setItem("avatar", response.data.avatar)
-
-      appDispatch({ type: "login" })
+      appDispatch({ type: "login", data: response.data })
       appDispatch({ type: "alertMessage", value: "Login successfully!", alert_type: "success" })
     } else {
       appDispatch({ type: "alertMessage", value: "Incorrect Username or Password!", alert_type: "danger" })
