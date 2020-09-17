@@ -7,6 +7,7 @@ import Home from "./components/home/Home"
 import HomeGuest from "./components/home/HomeGuest"
 import ViewPost from "./components/post/ViewPost"
 import CreatePost from "./components/post/CreatePost"
+import Profile from "./components/Profile"
 
 function AppRouting(props) {
   const state = useContext(StateContext)
@@ -21,6 +22,9 @@ function AppRouting(props) {
       </Route>
       <Route path="/post/:id">
         <ViewPost />
+      </Route>
+      <Route path="/profile/:username">
+        <Profile />
       </Route>
       <Route path="/about-us">
         <About />
