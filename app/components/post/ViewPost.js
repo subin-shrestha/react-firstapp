@@ -4,6 +4,7 @@ import Page from "../Page"
 import Request from "../../_requests/Request"
 import Loading from "../../_directives/Loading"
 import Axios from "axios"
+import ReactMarkdown from "react-markdown"
 
 function ViewPost() {
   const { id } = useParams()
@@ -71,7 +72,9 @@ function ViewPost() {
         Posted by <a href="#">{post.author.username}</a> on {dateFormatted}
       </p>
 
-      <div className="body-content">{post.body}</div>
+      <div className="body-content">
+        <ReactMarkdown source={post.body} allowedTypes={["paragraph", "strong", "emphasis", "text", "heading", "list", "listItem"]} />
+      </div>
     </Page>
   )
 }
