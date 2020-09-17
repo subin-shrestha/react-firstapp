@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react"
 import { withRouter } from "react-router-dom"
-import Page from "../components/Page"
-import DispatchContext from "../_contexts/DispatchContext"
-import StateContext from "../_contexts/StateContext"
-import Request from "../_requests/Request"
+import Page from "../Page"
+import DispatchContext from "../../_contexts/DispatchContext"
+import StateContext from "../../_contexts/StateContext"
+import Request from "../../_requests/Request"
 
 function CreatePost(props) {
   const [title, setTitle] = useState()

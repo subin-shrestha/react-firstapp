@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import Page from "../components/Page"
-import Request from "../_requests/Request"
+import Page from "../Page"
+import Request from "../../_requests/Request"
 
 function ViewPost() {
   const { id } = useParams()

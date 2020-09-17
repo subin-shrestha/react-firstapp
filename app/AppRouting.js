@@ -5,8 +5,8 @@ import About from "./components/footer/About"
 import Terms from "./components/footer/Terms"
 import Home from "./components/home/Home"
 import HomeGuest from "./components/home/HomeGuest"
-import CreatePost from "./post/CreatePost"
-import ViewPost from "./post/ViewPost"
+import ViewPost from "./components/post/ViewPost"
+import CreatePost from "./components/post/CreatePost"
 
 function AppRouting(props) {
   const state = useContext(StateContext)
