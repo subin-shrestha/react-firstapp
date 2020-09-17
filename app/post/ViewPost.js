@@ -1,11 +1,44 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import Page from "../components/Page"
+import Request from "../_requests/Request"
 
 function ViewPost() {
+  const { id } = useParams()
+  const [isLoading, setIsLoading] = useState(true)
+  const [post, setPost] = useState()
+
+  useEffect(() => {
+    async function fetchPost() {
+      const response = await Request(`/post/${id}`, "GET")
+      console.log(response)
+      setPost(response.data)
+      setIsLoading(false)
+    }
+    fetchPost()
+  }, [])
+
+  if (isLoading) {
+    return (
+      <Page title="...">
+        <div>Loading...</div>
+      </Page>
+    )
+  } else if (!post) {
+    return (
+      <Page title="404">
+        <div>No post found.</div>
+      </Page>
+    )
+  }
+
+  const date = new Date(post.createdDate)
+  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+
   return (
-    <Page title="Fake Titlle">
+    <Page title={post.title}>
       <div className="d-flex justify-content-between">
-        <h2>Example Post Title</h2>
+        <h2>{post.title}</h2>
         <span className="pt-2">
           <a href="#" className="text-primary mr-2" title="Edit">
             <i className="fas fa-edit"></i>
@@ -18,17 +51,12 @@ function ViewPost() {
 
       <p className="text-muted small mb-4">
         <a href="#">
-          <img className="avatar-tiny" src="https://gravatar.com/avatar/b9408a09298632b5151200f3449434ef?s=128" />
+          <img className="avatar-tiny" src={post.author.avatar} />
         </a>
-        Posted by <a href="#">brad</a> on 2/10/2020
+        Posted by <a href="#">{post.author.username}</a> on {dateFormatted}
       </p>
 
-      <div className="body-content">
-        <p>
-          Lorem ipsum dolor sit <strong>example</strong> post adipisicing elit. Iure ea at esse, tempore qui possimus soluta impedit natus voluptate, sapiente saepe modi est pariatur. Aut voluptatibus aspernatur fugiat asperiores at.
-        </p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae quod asperiores corrupti omnis qui, placeat neque modi, dignissimos, ab exercitationem eligendi culpa explicabo nulla tempora rem? Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ea at esse, tempore qui possimus soluta impedit natus voluptate, sapiente saepe modi est pariatur. Aut voluptatibus aspernatur fugiat asperiores at.</p>
-      </div>
+      <div className="body-content">{post.body}</div>
     </Page>
   )
 }
