@@ -10,7 +10,11 @@ function Annoymous() {
 
   async function HandleLogin(e) {
     e.preventDefault()
-    const response = await Request("/login", "POST", { username, password })
+    const response = await Request({
+      url: "/login",
+      method: "POST",
+      data: { username, password }
+    })
 
     if (response.data) {
       appDispatch({ type: "login", data: response.data })

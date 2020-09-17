@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Page from "../Page"
 import Request from "../../_requests/Request"
+import Loading from "../../_directives/Loading"
+import Axios from "axios"
 
 function ViewPost() {
   const { id } = useParams()
@@ -9,19 +11,32 @@ function ViewPost() {
   const [post, setPost] = useState()
 
   useEffect(() => {
+    const ourRequest = Axios.CancelToken.source()
+
     async function fetchPost() {
-      const response = await Request(`/post/${id}`, "GET")
-      console.log(response)
-      setPost(response.data)
-      setIsLoading(false)
+      try {
+        const response = await Request({
+          url: `/post/${id}`,
+          method: "GET",
+          cancelToken: ourRequest.token
+        })
+        setPost(response.data)
+        setIsLoading(false)
+      } catch (e) {
+        console.log(e)
+      }
     }
     fetchPost()
+
+    return () => {
+      ourRequest.cancel()
+    }
   }, [])
 
   if (isLoading) {
     return (
       <Page title="...">
-        <div>Loading...</div>
+        <Loading />
       </Page>
     )
   } else if (!post) {

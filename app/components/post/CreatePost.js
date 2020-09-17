@@ -14,12 +14,25 @@ function CreatePost(props) {
 
   async function handleCreatePost(e) {
     e.preventDefault()
-    const response = await Request("/create-post", "POST", { title, body, token: appState.user.token })
-    if (response.data.constructor === String) {
-      appDispatch({ type: "alertMessage", value: "New post created successfully.", alert_type: "success" })
-      props.history.push(`/post/${response.data}`)
-    } else {
-      appDispatch({ type: "alertMessage", value: response.data[0], alert_type: "danger" })
+
+    try {
+      const response = await Request({
+        url: "/create-post",
+        method: "POST",
+        data: {
+          title,
+          body,
+          token: appState.user.token
+        }
+      })
+      if (response.data.constructor === String) {
+        appDispatch({ type: "alertMessage", value: "New post created successfully.", alert_type: "success" })
+        props.history.push(`/post/${response.data}`)
+      } else {
+        appDispatch({ type: "alertMessage", value: response.data[0], alert_type: "danger" })
+      }
+    } catch (e) {
+      console.log(e)
     }
   }
   return (

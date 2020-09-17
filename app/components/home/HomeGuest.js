@@ -9,8 +9,16 @@ function HomeGuest() {
 
   async function handleSignup(e) {
     e.preventDefault()
-    const resposne = await Request("/register", "POST", { username, email, password })
-    console.log(resposne)
+    try {
+      const resposne = await Request({
+        url: "/register",
+        method: "POST",
+        data: { username, email, password }
+      })
+      console.log(resposne)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
