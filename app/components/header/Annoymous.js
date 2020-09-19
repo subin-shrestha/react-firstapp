@@ -18,7 +18,6 @@ function Annoymous() {
 
     if (response.data) {
       appDispatch({ type: "login", data: response.data })
-      appDispatch({ type: "alertMessage", value: "Login successfully!", alert_type: "success" })
     } else {
       appDispatch({ type: "alertMessage", value: "Incorrect Username or Password!", alert_type: "danger" })
     }

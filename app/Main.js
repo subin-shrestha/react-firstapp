@@ -25,9 +25,12 @@ function Main() {
       case "login":
         draft.loggedIn = true
         draft.user = action.data
+        draft.alertMessages.push({ content: "Login successfully!", alert_type: "success" })
         break
       case "logout":
         draft.loggedIn = false
+        draft.alertMessages.push({ content: "Logout successfully!", alert_type: "danger" })
+
         break
       case "alertMessage":
         draft.alertMessages.push({ content: action.value, alert_type: action.alert_type })

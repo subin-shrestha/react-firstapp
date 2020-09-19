@@ -9,7 +9,6 @@ function Registered(props) {
 
   function hangleLogout() {
     appDispatch({ type: "logout" })
-    appDispatch({ type: "alertMessage", value: "Logout successfully!", alert_type: "danger" })
     props.history.push("/")
   }
 
