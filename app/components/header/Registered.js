@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { Link, withRouter } from "react-router-dom"
+import ReactTooltip from "react-tooltip"
 import DispatchContext from "../../_contexts/DispatchContext"
 import StateContext from "../../_contexts/StateContext"
 
@@ -14,16 +15,19 @@ function Registered(props) {
 
   return (
     <div className="flex-row my-3 my-md-0">
-      <a href="#" className="text-white mr-2 header-search-icon">
+      <a href="#" data-tip="Search" data-for="search" className="text-white mr-2 header-search-icon">
         <i className="fas fa-search"></i>
       </a>
-      <span className="mr-2 header-chat-icon text-white">
+      <ReactTooltip id="search" />
+      <span data-tip="Chat" data-for="chat" className="mr-2 header-chat-icon text-white">
         <i className="fas fa-comment"></i>
         <span className="chat-count-badge text-white"> </span>
       </span>
-      <Link to={`/profile/${appState.user.username}`} className="mr-2">
+      <ReactTooltip id="chat" />
+      <Link to={`/profile/${appState.user.username}`} data-tip="Profile" data-for="user" className="mr-2">
         <img className="small-header-avatar" src={appState.user.avatar} />
       </Link>
+      <ReactTooltip id="user" />
       <Link to="/post/create" className="btn btn-sm btn-success mr-2">
         Create Post
       </Link>
