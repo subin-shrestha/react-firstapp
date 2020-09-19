@@ -8,30 +8,20 @@ import HomeGuest from "./components/home/HomeGuest"
 import ViewPost from "./components/post/ViewPost"
 import CreatePost from "./components/post/CreatePost"
 import Profile from "./components/Profile"
+import ProtectedRoute from "./ProtectedRoute"
 
 function AppRouting(props) {
   const state = useContext(StateContext)
 
   return (
     <Switch>
-      <Route path="/" exact>
-        {state.loggedIn ? <Home /> : <HomeGuest />}
-      </Route>
-      <Route path="/post/create">
-        <CreatePost />
-      </Route>
-      <Route path="/post/:id">
-        <ViewPost />
-      </Route>
-      <Route path="/profile/:username">
-        <Profile />
-      </Route>
-      <Route path="/about-us">
-        <About />
-      </Route>
-      <Route path="/terms">
-        <Terms />
-      </Route>
+      <Route path="/" component={state.loggedIn ? Home : HomeGuest} exact />
+      <ProtectedRoute path="/post/create" component={CreatePost} exact />
+      <ProtectedRoute path="/post/:id" component={ViewPost} exact />
+      <ProtectedRoute path="/profile/:username" component={Profile} exact />
+      <Route path="/about-us" component={About} exact />
+      <Route path="/terms" component={Terms} exact />
+      <Route path="*" component={() => "404 NOT FOUND."} />
     </Switch>
   )
 }
