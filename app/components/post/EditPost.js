@@ -100,6 +100,10 @@ function EditPost(props) {
         })
         if (response.data) {
           dispatch({ type: "fetchCompleted", value: response.data })
+          if (appState.user.username != response.data.author.username) {
+            appDispatch({ type: "alertMessage", value: "You do not have permission to edit that post.", alert_type: "danger" })
+            props.history.push("/")
+          }
         } else {
           dispatch({ type: "notFound" })
         }
