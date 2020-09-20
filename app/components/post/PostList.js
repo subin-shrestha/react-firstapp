@@ -1,7 +1,7 @@
 import Axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import Loading from "../../_directives/Loading"
+import Loading from "../pages/Loading"
 import Request from "../../_requests/Request"
 
 function PostList() {

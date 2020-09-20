@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Page from "../Page"
 import Request from "../../_requests/Request"
-import Loading from "../../_directives/Loading"
+import Loading from "../pages/Loading"
 import Axios from "axios"
 import ReactMarkdown from "react-markdown"
 import ReactTooltip from "react-tooltip"
+import Page404 from "../pages/Page404"
 
 function ViewPost() {
   const { id } = useParams()
@@ -36,17 +37,9 @@ function ViewPost() {
   }, [])
 
   if (isLoading) {
-    return (
-      <Page title="...">
-        <Loading />
-      </Page>
-    )
+    return <Loading />
   } else if (!post) {
-    return (
-      <Page title="404">
-        <div>No post found.</div>
-      </Page>
-    )
+    return <Page404 />
   }
 
   const date = new Date(post.createdDate)
@@ -57,9 +50,9 @@ function ViewPost() {
       <div className="d-flex justify-content-between">
         <h2>{post.title}</h2>
         <span className="pt-2">
-          <a href="#" data-tip="Edit" data-for="edit" className="text-primary mr-2">
+          <Link to={`/post/${id}/edit`} data-tip="Edit" data-for="edit" className="text-primary mr-2">
             <i className="fas fa-edit"></i>
-          </a>
+          </Link>
           <ReactTooltip id="edit" className="custom-tooltip" />{" "}
           <a data-tip="Delete" data-for="delete" className="delete-post-button text-danger">
             <i className="fas fa-trash"></i>
