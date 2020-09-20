@@ -9,6 +9,7 @@ import ViewPost from "./components/post/ViewPost"
 import CreatePost from "./components/post/CreatePost"
 import Profile from "./components/Profile"
 import ProtectedRoute from "./ProtectedRoute"
+import Page404 from "./components/pages/Page404"
 
 function AppRouting(props) {
   const state = useContext(StateContext)
@@ -21,7 +22,7 @@ function AppRouting(props) {
       <ProtectedRoute path="/profile/:username" component={Profile} exact />
       <Route path="/about-us" component={About} exact />
       <Route path="/terms" component={Terms} exact />
-      <Route path="*" component={() => "404 NOT FOUND."} />
+      <Route path="*" component={Page404} />
     </Switch>
   )
 }
