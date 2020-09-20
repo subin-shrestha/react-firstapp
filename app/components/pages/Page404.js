@@ -7,7 +7,7 @@ function Page404() {
     <Page title="404 Not Found">
       <div className="text-center">
         <h2>Whoops, we cannot find that page.</h2>
-        <p class="lead text-muted">
+        <p className="lead text-muted">
           You can always visit the <Link to="/">homepage</Link> to get a fresh start
         </p>
       </div>
