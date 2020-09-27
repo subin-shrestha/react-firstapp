@@ -38,7 +38,7 @@ function ViewPost(props) {
     return () => {
       ourRequest.cancel()
     }
-  }, [])
+  }, [id])
 
   if (isLoading) {
     return <Loading />
