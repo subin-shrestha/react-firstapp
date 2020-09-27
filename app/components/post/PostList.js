@@ -48,7 +48,7 @@ function PostList() {
   return (
     <div className="list-group">
       {posts.map(post => {
-        return <PostItem post={post} />
+        return <PostItem key={post._id} post={post} />
       })}
     </div>
   )
