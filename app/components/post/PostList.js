@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import Request from "../../_requests/Request"
 import Loading from "../pages/Loading"
+import PostItem from "./PostItem"
 
 function PostList() {
   const { username } = useParams()
@@ -47,15 +48,7 @@ function PostList() {
   return (
     <div className="list-group">
       {posts.map(post => {
-        const date = new Date(post.createdDate)
-        const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
-
-        return (
-          <Link key={post._id} to={`/post/${post._id}`} className="list-group-item list-group-item-action">
-            <img className="avatar-tiny" src={post.author.avatar} /> <strong>{post.title}</strong>
-            <span className="text-muted small"> on {dateFormatted}</span>
-          </Link>
-        )
+        return <PostItem post={post} />
       })}
     </div>
   )
