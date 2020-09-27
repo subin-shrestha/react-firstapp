@@ -13,9 +13,14 @@ function Registered(props) {
     props.history.push("/")
   }
 
+  function handleSearch(e) {
+    e.preventDefault()
+    appDispatch({ type: "openSearch" })
+  }
+
   return (
     <div className="flex-row my-3 my-md-0">
-      <a href="#" data-tip="Search" data-for="search" className="text-white mr-2 header-search-icon">
+      <a href="#" onClick={handleSearch} data-tip="Search" data-for="search" className="text-white mr-2 header-search-icon">
         <i className="fas fa-search"></i>
       </a>
       <ReactTooltip id="search" />

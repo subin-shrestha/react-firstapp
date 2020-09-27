@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
 import { useImmerReducer } from "use-immer"
+import { CSST, CSSTransition } from "react-transition-group"
 import AppRouting from "./AppRouting"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
+import Search from "./components/pages/Search"
 import DispatchContext from "./_contexts/DispatchContext"
 import StateContext from "./_contexts/StateContext"
 import Alert from "./_directives/Alert"
@@ -17,7 +19,8 @@ function Main() {
       token: localStorage.getItem("token"),
       username: localStorage.getItem("username"),
       avatar: localStorage.getItem("avatar")
-    }
+    },
+    isSearchOpen: false
   }
 
   function ourReducer(draft, action) {
@@ -30,10 +33,15 @@ function Main() {
       case "logout":
         draft.loggedIn = false
         draft.alertMessages.push({ content: "Logout successfully!", alert_type: "danger" })
-
         break
       case "alertMessage":
         draft.alertMessages.push({ content: action.value, alert_type: action.alert_type })
+        break
+      case "openSearch":
+        draft.isSearchOpen = true
+        break
+      case "closeSearch":
+        draft.isSearchOpen = false
         break
     }
   }
@@ -59,6 +67,9 @@ function Main() {
           <Alert messages={state.alertMessages} />
           <Header />
           <AppRouting />
+          <CSSTransition timeout={330} in={state.isSearchOpen} classNames="search-overlay" unmountOnExit>
+            <Search />
+          </CSSTransition>
           <Footer />
         </BrowserRouter>
       </DispatchContext.Provider>
