@@ -32,7 +32,7 @@ function PostList() {
     return () => {
       ourRequest.cancel()
     }
-  }, [])
+  }, [username])
 
   if (isFetching) {
     return <Loading />
