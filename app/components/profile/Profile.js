@@ -171,13 +171,13 @@ function Profile() {
       if (state.profile.isFollowing) {
         return (
           <button onClick={e => dispatch({ type: "stopFollowing" })} className={`btn btn-danger btn-sm ml-2`}>
-            Unfollow{state.followingActionLoading ? "ing..." : ""} <i className="fas fa-user-times"></i>
+            Unfollow{state.followingActionLoading && "ing..."} <i className="fas fa-user-times"></i>
           </button>
         )
       } else {
         return (
           <button onClick={e => dispatch({ type: "startFollowing" })} className={`btn btn-primary btn-sm ml-2`}>
-            Follow{state.followingActionLoading ? "ing..." : ""} <i className="fas fa-user-plus"></i>
+            Follow{state.followingActionLoading && "ing..."} <i className="fas fa-user-plus"></i>
           </button>
         )
       }

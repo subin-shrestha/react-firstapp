@@ -114,8 +114,8 @@ function Search() {
 
       <div className="search-overlay-bottom">
         <div className="container container--narrow py-3">
-          <div className={"circle-loader " + (state.show == "loading" ? "circle-loader--visible" : "")}></div>
-          <div className={"live-search-results " + (state.show == "results" ? "live-search-results--visible" : "")}>{showResults()}</div>
+          <div className={"circle-loader " + (state.show == "loading" && "circle-loader--visible")}></div>
+          <div className={"live-search-results " + (state.show == "results" && "live-search-results--visible")}>{showResults()}</div>
         </div>
       </div>
     </div>
