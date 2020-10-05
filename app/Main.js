@@ -10,6 +10,7 @@ import Search from "./components/pages/Search"
 import DispatchContext from "./_contexts/DispatchContext"
 import StateContext from "./_contexts/StateContext"
 import Alert from "./_directives/Alert"
+import Chat from "./components/Chat"
 
 function Main() {
   const initialState = {
@@ -20,7 +21,8 @@ function Main() {
       username: localStorage.getItem("username"),
       avatar: localStorage.getItem("avatar")
     },
-    isSearchOpen: false
+    isSearchOpen: false,
+    isChatOpen: false
   }
 
   function ourReducer(draft, action) {
@@ -42,6 +44,12 @@ function Main() {
         break
       case "closeSearch":
         draft.isSearchOpen = false
+        break
+      case "toggleChat":
+        draft.isChatOpen = !draft.isChatOpen
+        break
+      case "closeChat":
+        draft.isChatOpen = false
         break
     }
   }
@@ -70,6 +78,7 @@ function Main() {
           <CSSTransition timeout={330} in={state.isSearchOpen} classNames="search-overlay" unmountOnExit>
             <Search />
           </CSSTransition>
+          <Chat />
           <Footer />
         </BrowserRouter>
       </DispatchContext.Provider>

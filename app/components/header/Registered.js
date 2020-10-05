@@ -13,6 +13,10 @@ function Registered(props) {
     props.history.push("/")
   }
 
+  function handleChat() {
+    appDispatch({ type: "toggleChat" })
+  }
+
   function handleSearch(e) {
     e.preventDefault()
     appDispatch({ type: "openSearch" })
@@ -24,7 +28,7 @@ function Registered(props) {
         <i className="fas fa-search"></i>
       </a>
       <ReactTooltip id="search" />
-      <span data-tip="Chat" data-for="chat" className="mr-2 header-chat-icon text-white">
+      <span onClick={handleChat} data-tip="Chat" data-for="chat" className="mr-2 header-chat-icon text-white">
         <i className="fas fa-comment"></i>
         <span className="chat-count-badge text-white"> </span>
       </span>
