@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react"
+import React, { Suspense, useEffect } from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
 import { useImmerReducer } from "use-immer"
-import { CSST, CSSTransition } from "react-transition-group"
+import { CSSTransition } from "react-transition-group"
 import AppRouting from "./AppRouting"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
-import Search from "./components/pages/Search"
 import DispatchContext from "./_contexts/DispatchContext"
 import StateContext from "./_contexts/StateContext"
 import Alert from "./_directives/Alert"
-import Chat from "./components/Chat"
+// import Chat from "./components/Chat"
+import Loading from "./components/pages/Loading"
+
+const Search = React.lazy(() => import("./components/pages/Search"))
+const Chat = React.lazy(() => import("./components/Chat"))
 
 function Main() {
   const initialState = {
@@ -76,9 +79,13 @@ function Main() {
           <Header />
           <AppRouting />
           <CSSTransition timeout={330} in={state.isSearchOpen} classNames="search-overlay" unmountOnExit>
-            <Search />
+            <div className="search-overlay">
+              <Suspense fallback="">
+                <Search />
+              </Suspense>
+            </div>
           </CSSTransition>
-          <Chat />
+          <Suspense fallback={<Loading />}>{state.loggedIn && <Chat />}</Suspense>
           <Footer />
         </BrowserRouter>
       </DispatchContext.Provider>
