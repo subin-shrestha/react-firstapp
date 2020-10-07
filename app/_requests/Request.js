@@ -6,7 +6,7 @@ function Request(props) {
     url: props.url,
     method: props.method,
     data: props.data,
-    baseURL: process.env.BACKENDURL || "",
+    baseURL: process.env.BACKENDURL || "https://complexapp-nodejs.herokuapp.com",
     cancelToken: props.cancelToken
   })
 }
