@@ -4,8 +4,9 @@ import StateContext from "../_contexts/StateContext"
 import Annoymous from "./header/Annoymous"
 import Registered from "./header/Registered"
 
-function Header() {
+function Header(props) {
   const appState = useContext(StateContext)
+  const headerContent = appState.loggedIn ? <Registered /> : <Annoymous />
 
   return (
     <header className="header-bar bg-primary mb-3">
@@ -15,7 +16,7 @@ function Header() {
             ComplexApp
           </Link>
         </h4>
-        {appState.loggedIn ? <Registered /> : <Annoymous />}
+        {!props.staticEmpty && headerContent}
       </div>
     </header>
   )
